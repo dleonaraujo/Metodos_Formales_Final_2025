@@ -1,0 +1,27 @@
+class Acceso
+
+types
+public String = seq of char;
+public Time = nat * nat * nat;
+
+instance variables
+private id_acceso: nat1;
+public hora: Time;
+public usuario: String;
+public autorizado: bool;
+
+-- añadiendo map
+public alerta: map int to Alerta;
+
+operations
+-- arreglar constructor, para recibir mapa
+public Acceso: nat1 * Time * String * bool * bool ==> Acceso
+Acceso (id, time, user, auth, alert) == (
+    id_acceso := id;
+    hora := time;
+    usuario := user;
+    autorizado := auth;
+    alerta := alert; -- recibir mapa
+);
+
+end Acceso

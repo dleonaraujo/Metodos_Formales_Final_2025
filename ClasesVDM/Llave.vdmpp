@@ -1,0 +1,37 @@
+class Llave
+
+types
+public String = seq of char
+
+instance variables
+private id_llave: nat1;
+private tipo_llave: String;
+public estado: bool;
+public accesos: seq of Acceso;
+
+operations
+public Llave: nat1 * String * bool * seq of Acceso ==> Llave
+Llave (id, type_key, flag, access) == (
+    id_llave := id;
+    tipo_llave := type_key;
+    estado := flag;
+    accesos := access;
+);
+
+public setEstado: bool ==> ()
+setEstado(flag) == (
+    estado := flag;
+);
+
+public verificarAcceso: nat1 ==> bool
+verificarAcceso(idx) == (
+    return accesos(idx).alerta;
+	-- alerta ya no es bool, es map, arreglar
+);
+
+public registrarAcceso: Acceso ==> ()
+registrarAcceso (acc) == (
+	accesos := accesos ^ [acc];
+);
+
+end Llave

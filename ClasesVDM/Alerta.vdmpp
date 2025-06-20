@@ -1,0 +1,16 @@
+class Alerta
+
+instance variables
+public id: nat1;
+public alerta: bool;
+
+
+operations
+
+public Alerta: nat1 * bool ==> Alerta
+Alerta(i,alert) == (
+	id:= i;
+	alerta:= alert;
+);
+
+end Alerta
