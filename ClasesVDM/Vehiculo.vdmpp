@@ -1,0 +1,50 @@
+class Vehiculo
+
+types
+public String = seq of char
+
+instance variables
+private id_vehiculo: nat1;
+public modelo: String;
+private usuario: String;
+public llaves: seq of Llave;
+public intentos: nat;
+
+operations
+public Vehiculo: nat1 * String * String * seq of Llave ==> Vehiculo
+Vehiculo(id, model, user, keys) == (
+    id_vehiculo := id;
+    modelo := model;
+    usuario := user;
+    llaves := keys;
+);
+
+public integrarLlave: Llave ==> ()
+integrarLlave (key) == (
+    llaves := llaves ^ [key];
+);
+
+public bloquearAcceso: nat1 * bool ==> ()
+bloquearAcceso(idx, e) == (
+  llaves(idx).setEstado(e);
+);
+
+public restringirLlave: () ==> ()
+restringirLlave() == (
+	intentos := 0;
+    for i = 1 to len llaves do (
+        for j = 1 to len llaves(i).accesos do (
+            if llaves(i).verificarAcceso(j) = true then (
+                intentos := intentos + 1;
+            );
+
+            if intentos = 3 then (
+                bloquearAcceso(i, false);
+                intentos := 0;
+            );
+        );
+    );
+);
+
+
+end Vehiculo

@@ -1,0 +1,107 @@
+class Validacion
+
+types
+public String = seq of Char;
+
+instance variables
+public vehiculo: Vehiculo;
+public llaves: seq of Llave;
+public accesos1: seq of Acceso;
+public accesos2: seq of Acceso;
+public intentos: nat;
+
+operations
+public Validacion: () ==> ()
+Validacion() == ();
+
+public comprobacionPrueba1: () ==> ()
+comprobacionPrueba1() == (
+
+    intentos := 0;
+
+	-- arreglar accesos de prueba para integrar map como parametro
+    accesos1 := [
+        new Acceso(1, mk_(23, 12, 50), "Usuario 1", true, false),
+        new Acceso(2, mk_(22, 11, 20), "Usuario 1", true, false),
+        new Acceso(3, mk_(10, 53, 30), "Usuario 1", true, false),
+        new Acceso(4, mk_(9, 10, 33), "Usuario 1", true, false),
+        new Acceso(5, mk_(7, 24, 23), "Usuario 1", true, false)
+    ];
+
+	-- arreglar accesos de prueba para integrar map como parametro
+    accesos2 := [
+        new Acceso(1, mk_(23, 12, 50), "Usuario 1", true, false),
+        new Acceso(2, mk_(22, 11, 20), "Usuario 1", true, false),
+        new Acceso(3, mk_(10, 53, 30), "Usuario 1", true, false),
+        new Acceso(4, mk_(9, 10, 33), "Usuario 1", true, false),
+        new Acceso(5, mk_(7, 24, 23), "Usuario 1", true, false)
+    ];
+	
+	llaves := [
+		new Llave(1, "tipo1", true, []),
+		new Llave(2, "tipo2", true, [])
+	];
+	
+	for i = 1 to len accesos1 do (
+		llaves(1).registrarAcceso(accesos1(i));
+	);
+	
+	for i = 1 to len accesos2 do (
+		llaves(2).registrarAcceso(accesos2(i));
+	);
+	
+    vehiculo := new Vehiculo(1, "Modelo 1", "Usuario 1", []);
+	
+	for i = 1 to len llaves do (
+		vehiculo.integrarLlave(llaves(i));
+	);
+	
+);
+
+public comprobacionPrueba2: () ==> ()
+comprobacionPrueba2() == (
+	-- arreglar accesos de prueba para integrar map como parametro
+    accesos1 := [
+        new Acceso(1, mk_(23, 12, 50), "Usuario 1", true, true),
+        new Acceso(2, mk_(22, 11, 20), "Usuario 1", true, true),
+        new Acceso(3, mk_(10, 53, 30), "Usuario 1", true, false),
+        new Acceso(4, mk_(9, 10, 33), "Usuario 1", true, true),
+        new Acceso(5, mk_(7, 24, 23), "Usuario 1", true, true)
+    ];
+
+	-- arreglar accesos de prueba para integrar map como parametro
+    accesos2 := [
+        new Acceso(1, mk_(23, 12, 50), "Usuario 1", true, true),
+        new Acceso(2, mk_(22, 11, 20), "Usuario 1", true, false),
+        new Acceso(3, mk_(10, 53, 30), "Usuario 1", true, true),
+        new Acceso(4, mk_(9, 10, 33), "Usuario 1", true, false),
+        new Acceso(5, mk_(7, 24, 23), "Usuario 1", true, true)
+    ];
+
+    
+	llaves := [
+		new Llave(1, "tipo1", true, []),
+		new Llave(2, "tipo2", true, [])
+	];
+	
+	for i = 1 to len accesos1 do (
+		llaves(1).registrarAcceso(accesos1(i));
+	);
+	
+	for i = 1 to len accesos2 do (
+		llaves(2).registrarAcceso(accesos2(i));
+	);
+	
+    vehiculo := new Vehiculo(1, "Modelo 1", "Usuario 1", []);
+	
+	for i = 1 to len llaves do (
+		vehiculo.integrarLlave(llaves(i));
+	);
+);
+
+public verificacion_restriccion_llave: () ==> ()
+verificacion_restriccion_llave() == (
+	vehiculo.restringirLlave();
+);
+
+end Validacion
